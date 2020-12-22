@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>To Do</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta charset="UTF-8"/>
+    <link type="text/css" href="static/css/index.css" th:href="@{static/css/index.css}" rel="stylesheet" />
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+    
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+
+
+<style>
+.content{
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+.item{
+    border: 2px solid black;
+    width: 700px;
+    display: flex;
+    align-self: center;
+    flex-direction: column;
+    align-content: center;
+    margin-top: 30px;
+}
+.item_data{
+    padding-top: 10px;
+    padding-left: 15px;
+}
+
+.add-button{
+    text-align: center;
+}
+
+</style>
+
+
+
+<body>
+<div class="add-button">
+    <a href="/add" target="_self" style="float: left; margin: 10px"> <button>Добавить task</button></a>
+</div>
+
+
+
+        <div>
+            <a class="cart" href="/inProgress" style="float: right; margin: 10px">
+                <button class="button-board" th:attr="board-id=${id}">
+                    In Progress
+                </button>  
+            </a>
+        </div>
+
+    <div style="text-align: center;"><h1> To Do</h1></div>
+
+
+    <div class="content">
+
+        <div  th:id="${item.getName()} + -item" th:each="item : ${items}">
+            <div class="item">
+                <form action="/" method="get">
+                    <p class="item_data"  th:text="'Название: ' + ${item.getName()}" ></p>
+                    <p class="item_data"  th:text="'Описание: ' + ${item.getDescription()}" ></p>
+                    <p class="item_data"  th:text="'Тип задачи: ' + ${item.getType()}" ></p>
+                    <p class="item_data"  th:text="'Ответственный: ' + ${item.getResponsible()}" ></p>
+                </form>
+                <button style="background-color: grey; border-color: black" class="btn btn-sm add-in-cart-btn" th:id="${item.getId()}" th:attr="data-item-id=${item.getId()}">Переместить в In Progress</button>
+                <button style="background-color: grey; border-color: black" class="btn btn-sm delete-btn" th:id="${item.getId()}" th:attr="data-item-id=${item.getId()}" > Удалить задачу из списка </button>
+
+                
+            </div>
+
+    </div>
+
+
+        <form th:action="@{/logout}" method="post">
+            <input type="submit" value="Sign Out"/>
+        </form>
+</div>
+
+
+
+
+
+        <script>
+            $(".button-board").click(e) => {
+                var btn = $(e.currentTarget);
+                var boardId = btn.attr("data-item-id");
+                btn.attr("disabled", "disabled");
+
+                $.get("/item/" + boardId + "/delete", () => {
+
+                });
+            }
+
+            $(".add-in-cart-btn").click((e) => {
+                var btn = $(e.currentTarget);
+                var itemId = btn.attr("data-item-id");
+                btn.css({
+                'color': 'grey'
+                    });
+
+                btn.attr("disabled", "disabled");
+                $.post("/add/" + itemId + "/inProgress", () => {
+                });
+            });
+
+                $(".delete-btn").click((e) => {
+                var btn = $(e.currentTarget);
+                var itemId = btn.attr("data-item-id");
+                btn.attr("disabled", "disabled");
+
+                $.post("/item/" + itemId + "/delete", () => {
+
+                });
+            });
+
+ 
+        </script>
+    </div>
+</body>
+</html>

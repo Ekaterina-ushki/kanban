@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Boards</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta charset="UTF-8"/>
+    <link type="text/css" href="static/css/index.css" th:href="@{static/css/index.css}" rel="stylesheet" />
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+
+<style>
+    .board{
+        border: 2px solid black;
+        width: 700px;
+        display: flex;
+        align-self: center;
+        flex-direction: column;
+        align-content: center;
+        margin-top: 30px;}
+
+    .board_data{
+        padding-top: 10px;
+        padding-left: 15px;
+    }
+</style>
+
+<body>
+    <div class="add-button">
+        <a href="/add" target="_self" style="float: left; margin: 10px"> <button>Добавить новую доску</button></a>
+    </div>
+    <div th:action="@{/logout}" method="post">
+        <input style="float: right; margin: 10px" type="submit" value="Sign Out"/>
+    </div>
+
+    <div style="text-align: center;"><h1> Доски</h1></div>
+
+    <div class="content">
+
+        <div th:each="board : ${boards}">
+            <div class="board">
+                <form action="/board" method="get">
+                    <p class="board_data" th:text="${board.getName()}"></p>
+                </form>
+                <a class="board_data" th:href = "'/main/'+${board.getId()}"> <button>Перейти к задачам</button>  </a>
+
+
+            </div>
+
+        </div>
+
+</body>
+</html>
