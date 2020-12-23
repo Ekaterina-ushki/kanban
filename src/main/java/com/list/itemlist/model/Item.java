@@ -40,16 +40,6 @@ public class Item {
         this.board_id = board_id;
     }
 
-    public Item(int id, String name, String description,
-                String type, String responsible, String status) {
-        this.id = id;
-        this.name = name;
-        this.description = description;
-        this.type = type;
-        this.responsible = responsible;
-        this.status = status;
-    }
-
     public int getId() {
         return id;
     }

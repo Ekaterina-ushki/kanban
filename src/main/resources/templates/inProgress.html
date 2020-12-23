@@ -2,8 +2,8 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <title>In Progress</title>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
     <meta charset="UTF-8"/>
     <link type="text/css" href="static/css/index.css" th:href="@{static/css/index.css}" rel="stylesheet" />
     <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
@@ -31,38 +31,25 @@
         padding-top: 10px;
         padding-left: 15px;
     }
-
-    .add-button{
-        text-align: center;
-    }
-
 </style>
 
-
-
 <body>
-<div>
-    <a class="cart" href="/main" style="float: left; margin: 10px">
-        <button>
-            To Do
-        </button>
-    </a>
+    <div>
+        <a class="cart" th:href="'/main/'+${id}" style="float: left; margin: 10px">
+            <button>To Do</button>
+        </a>
 
-    <a class="cart" href="/done" style="float: right; margin: 10px">
-        <button>
-            Done
-        </button>
-    </a>
-</div>
+        <a class="cart" th:href="'/done/'+${id}" style="float: right; margin: 10px">
+            <button>Done</button>
+        </a>
+    </div>
 
-<div style="text-align: center;"><h1> In Progress</h1></div>
+    <div style="text-align: center;"><h1> In Progress</h1></div>
 
-
-<div class="content">
+    <div class="content">
 
     <div  th:id="${item.getName()} + -item" th:each="item : ${items}">
         <div class="item">
-            <input type="hidden" name="_csrf" value="{{_csrf.token}}" />
             <form action="/inProgress" method="get">
                 <p class="item_data"  th:text="'Название: ' + ${item.getName()}" ></p>
                 <p class="item_data"  th:text="'Описание: ' + ${item.getDescription()}" ></p>
@@ -71,28 +58,20 @@
             </form>
             <button style="background-color: grey; border-color: black" class="btn btn-sm add-in-cart-btn" th:id="${item.getId()}" th:attr="data-item-id=${item.getId()}">Переместить в Done</button>
         </div>
-
     </div>
 </div>
-
-
-
 
 
 <script>
     $(".add-in-cart-btn").click((e) => {
         var btn = $(e.currentTarget);
-    var itemId = btn.attr("data-item-id");
-    btn.css({
-        'color': 'grey'
-    });
+        var itemId = btn.attr("data-item-id");
+        var boardId = btn.attr("board-id");
+        btn.css({'color': 'grey'});
 
-    btn.attr("disabled", "disabled");
-    $.post("/add/" + itemId + "/done", () => {
+        btn.attr("disabled", "disabled");
+        $.post("/add/" + itemId + boardId + "/done", () => {});
     });
-    });
-
-
 </script>
 </div>
 </body>

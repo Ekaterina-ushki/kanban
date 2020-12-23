@@ -32,9 +32,17 @@ public class BoardController {
         return modelAndView;
     }
 
+    @GetMapping("/add")
+    public ModelAndView add_board(Model model) {
+        List<Board> boards = boardService.findAllBoard();
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.setViewName("add_board");
+        logger.info("Page Add Board is opened");
+        return modelAndView;
+    }
 
-    @PostMapping("/board/add/confirm")
-    public ModelAndView add_board(@RequestParam("name") String name){
+    @PostMapping("/add/confirm")
+    public ModelAndView add_confirm(@RequestParam("name") String name){
         boardService.addBoard(0, name);
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("confirm_board");

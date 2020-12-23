@@ -17,23 +17,27 @@ public class AddController {
 
     static final Logger logger = LoggerFactory.getLogger(AddController.class);
 
-    @PostMapping("/add/confirm")
+    @RequestMapping(path = "/add/confirm/{id}", method = RequestMethod.GET)
     public ModelAndView add(@RequestParam("name") String name,
                             @RequestParam("description") String description,
                             @RequestParam("type") String type,
-                            @RequestParam("responsible") String responsible){
+                            @RequestParam("responsible") String responsible,
+                            @PathVariable("id") int id){
 
-        itemService.addItem(0, name, description, type, responsible, "To Do");
+        itemService.addItem(0, name, description, type, responsible, "To Do", id);
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("confirm");
+        modelAndView.addObject("id", id);
         logger.info("Добавление таска");
         return modelAndView;
     }
 
-    @GetMapping("/add")
-    public ModelAndView add(){
+
+    @RequestMapping(path = "/add/{id}", method = RequestMethod.GET)
+    public ModelAndView add(@PathVariable("id") int id){
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("addItem");
+        modelAndView.addObject("id", id);
         logger.info("Page Add is opened");
         return modelAndView;
     }

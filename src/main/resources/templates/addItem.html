@@ -18,15 +18,14 @@
 
 <body>
     <div class= itemAdd id="prodAdd" style="padding-left: 30px; padding-top: 10px">
-        <a href="/main"><button>Вернуться к To Do</button></a>
+        <a th:href="'/main/'+${id}"><button>Вернуться к To Do</button></a>
         <div class="new_element"> <span>Добавить новую задачу</span>
-            <form action="/add/confirm" method="post" enctype="multipart/form-data">
+            <form th:action="'/add/confirm/'+${id}" method="get" enctype="multipart/form-data">
                 <p><input type="text" placeholder="Наизвание " name="name" id="name" required/>
                 <p><input type="text" placeholder="Описание" name="description" id="description" required/>
                 <p><input type="text" placeholder="Тип" name="type" id="type" required/>
                 <p><input type="text" placeholder="Ответственный" name="responsible" id="responsible" required/>
 
-                <input type="hidden" name="_csrf" value="{{_csrf.token}}" />
                 <p><button type="submit" id="submit">Добавить</button></p>
 
             </form></div>

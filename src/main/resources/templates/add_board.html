@@ -1,10 +1,32 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+    <title>Добавление новой доски</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <meta charset="UTF-8"/>
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
 
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<style>
+    .new_element{
+        margin-top: 30px;
+        padding-left: 1px;
+    }
+</style>
+
+<body>
+    <div class= itemAdd id="prodAdd" style="padding-left: 30px; padding-top: 10px">
+        <a href="/board"><button>Вернуться к выбору доски</button></a>
+        <div class="new_element">
+            <span>Добавить новую доску</span>
+            <form action="/add/confirm" method="post" enctype="multipart/form-data">
+                <p><input type="text" placeholder="Наизвание " name="name" id="name" required/>
+
+                <p><button type="submit" id="submit">Добавить</button></p>
+            </form>
+        </div>
+    </div>
 </body>
 </html>

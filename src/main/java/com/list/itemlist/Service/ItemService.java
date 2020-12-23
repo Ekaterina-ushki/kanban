@@ -12,8 +12,8 @@ public class ItemService {
 
     private static ItemDAO dataBase = new DBService();
 
-    public void addItem(int id, String name, String description, String type, String responsible, String status) {
-        Item item = new Item(id, name, description, type, responsible, status);
+    public void addItem(int id, String name, String description, String type, String responsible, String status, int board_id) {
+        Item item = new Item(id, name, description, type, responsible, status, board_id);
         dataBase.addItem(item);
     }
 

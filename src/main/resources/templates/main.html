@@ -2,8 +2,8 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <title>To Do</title>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
     <meta charset="UTF-8"/>
     <link type="text/css" href="static/css/index.css" th:href="@{static/css/index.css}" rel="stylesheet" />
     <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
@@ -35,31 +35,30 @@
 .add-button{
     text-align: center;
 }
-
 </style>
 
-
-
 <body>
-<div class="add-button">
-    <a href="/add" target="_self" style="float: left; margin: 10px"> <button>Добавить task</button></a>
-</div>
+    <div>
+        <a href="/board" target="_self" style="float: left; margin: 10px"> <button>Back</button></a>
+    </div>
+    <div class="add-button">
+        <a th:href="'/add/'+${id}" target="_self" style="float: left; margin: 10px"> <button>Добавить task</button></a>
+    </div>
 
-
-
-        <div>
-            <a class="cart" href="/inProgress" style="float: right; margin: 10px">
-                <button class="button-board" th:attr="board-id=${id}">
-                    In Progress
-                </button>  
-            </a>
-        </div>
+    <div>
+        <form style="float: right; margin: 10px" th:action="@{/logout}" method="post">
+            <input type="submit" value="Sign Out"/>
+        </form>
+    </div>
+    <div>
+        <a class="cart" th:href="'/inProgress/'+${id}" style="float: right; margin: 10px">
+            <button class="button-board" th:attr="board-id=${id}">In Progress</button>
+        </a>
+    </div>
 
     <div style="text-align: center;"><h1> To Do</h1></div>
 
-
     <div class="content">
-
         <div  th:id="${item.getName()} + -item" th:each="item : ${items}">
             <div class="item">
                 <form action="/" method="get">
@@ -70,57 +69,32 @@
                 </form>
                 <button style="background-color: grey; border-color: black" class="btn btn-sm add-in-cart-btn" th:id="${item.getId()}" th:attr="data-item-id=${item.getId()}">Переместить в In Progress</button>
                 <button style="background-color: grey; border-color: black" class="btn btn-sm delete-btn" th:id="${item.getId()}" th:attr="data-item-id=${item.getId()}" > Удалить задачу из списка </button>
-
-                
             </div>
-
+        </div>
     </div>
 
 
-        <form th:action="@{/logout}" method="post">
-            <input type="submit" value="Sign Out"/>
-        </form>
-</div>
 
+<script>
+    $(".add-in-cart-btn").click((e) => {
+        var btn = $(e.currentTarget);
+        var itemId = btn.attr("data-item-id");
+        var boardId = btn.attr("board-id");
+        btn.css({'color': 'grey'});
 
+        btn.attr("disabled", "disabled");
+        $.post("/add/" + itemId +"/inProgress", () => {});
+    });
 
+    $(".delete-btn").click((e) => {
+        var btn = $(e.currentTarget);
+        var itemId = btn.attr("data-item-id");
+        btn.attr("disabled", "disabled");
 
-
-        <script>
-            $(".button-board").click(e) => {
-                var btn = $(e.currentTarget);
-                var boardId = btn.attr("data-item-id");
-                btn.attr("disabled", "disabled");
-
-                $.get("/item/" + boardId + "/delete", () => {
-
-                });
-            }
-
-            $(".add-in-cart-btn").click((e) => {
-                var btn = $(e.currentTarget);
-                var itemId = btn.attr("data-item-id");
-                btn.css({
-                'color': 'grey'
-                    });
-
-                btn.attr("disabled", "disabled");
-                $.post("/add/" + itemId + "/inProgress", () => {
-                });
-            });
-
-                $(".delete-btn").click((e) => {
-                var btn = $(e.currentTarget);
-                var itemId = btn.attr("data-item-id");
-                btn.attr("disabled", "disabled");
-
-                $.post("/item/" + itemId + "/delete", () => {
-
-                });
-            });
+        $.post("/item/" + itemId + "/delete", () => {});
+    });
 
  
-        </script>
-    </div>
+</script>
 </body>
 </html>

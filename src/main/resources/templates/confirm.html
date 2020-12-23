@@ -2,8 +2,8 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <title>Подтверждение</title>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
     <meta charset="UTF-8"/>
     <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
 
@@ -20,14 +20,10 @@
 </style>
 
 <body>
-
-<h3 style="padding-top: 10px; text-align: center">Вы хотите добавить эту задачу в список?</h3>
-<div style="text-align: center">
-    <p class="btn"><a class="confirm" href="/main" >Да</a></p>
-    <p class="btn"><a href="/main">Нет, вернуться к To Do</a></p>
-    <input type="hidden" name="_csrf" value="{{_csrf.token}}" />
-</div>
-
-
+    <h3 style="padding-top: 10px; text-align: center">Вы хотите добавить эту задачу в список?</h3>
+    <div style="text-align: center">
+        <p class="btn"><a class="confirm" th:href="'/main/'+${id}" >Да</a></p>
+        <p class="btn"><a th:href="'/main/'+${id}">Нет, вернуться к To Do</a></p>
+    </div>
 </body>
 </html>
