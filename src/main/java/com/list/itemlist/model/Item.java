@@ -58,15 +58,15 @@ public class Item {
 
     public String getDescription(){return description;}
 
-    public void setDescription(){this.description = description;}
+    public void setDescription(String description){this.description = description;}
 
     public String getType(){return type;}
 
-    public void setType(){this.type = type;}
+    public void setType(String type){this.type = type;}
 
     public String getResponsible(){return responsible;}
 
-    public void setResponsible(){this.responsible = responsible;}
+    public void setResponsible(String responsible){this.responsible = responsible;}
 
     public String getStatus() {
         return status;

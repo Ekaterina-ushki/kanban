@@ -46,7 +46,7 @@
 
     <div style="text-align: center;"><h1> Done</h1></div>
 
-    <div class="content">
+    <div class="content" id="task-list">
         <div  th:id="${item.getName()} + -item" th:each="item : ${items}">
             <div class="item">
                 <form action="/" method="get">
@@ -70,6 +70,6 @@
     });
 
 </script>
-</div>
+
 </body>
 </html>

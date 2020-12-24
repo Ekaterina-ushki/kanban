@@ -31,11 +31,13 @@
     <div class="add-button">
         <a href="/add" target="_self" style="float: left; margin: 10px"> <button>Добавить новую доску</button></a>
     </div>
-    <div th:action="@{/logout}" method="post">
-        <input style="float: right; margin: 10px" type="submit" value="Sign Out"/>
+    <div>
+        <form style="float: right; margin: 10px" th:action="@{/logout}" method="post">
+            <input type="submit" value="Sign Out"/>
+        </form>
     </div>
 
-    <div style="text-align: center;"><h1> Доски</h1></div>
+    <div style="text-align: center;"><h1 id="boards">Доски</h1></div>
 
     <div class="content">
         <div th:each="board : ${boards}">

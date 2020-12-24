@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Редактирование задачи</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <meta charset="UTF-8"/>
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+
+<body>
+<div class= "itemAdd" id="prodAdd" style="padding-left: 30px; padding-top: 10px">
+    <a th:href="'/main/'+${id}"><button>Вернуться к To Do</button></a>
+    <p id="add-item" style="margin-top: 5px">Вы можете изменить описание задачи</p>
+    <form th:action="'/main/edit-p/'+${id}" method="post" enctype="multipart/form-data">
+        <p><input type="text" placeholder="Описание" name="description" id="description" th:required="required"/></p>
+        <p><button type="submit" id="submit">Изменить</button></p>
+
+    </form>
+
+</div>
+
+
+</body>
+</html>

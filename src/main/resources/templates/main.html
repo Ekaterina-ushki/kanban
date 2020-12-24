@@ -58,7 +58,7 @@
 
     <div style="text-align: center;"><h1> To Do</h1></div>
 
-    <div class="content">
+    <div class="content" id="task-list">
         <div  th:id="${item.getName()} + -item" th:each="item : ${items}">
             <div class="item">
                 <form action="/" method="get">
@@ -69,6 +69,7 @@
                 </form>
                 <button style="background-color: grey; border-color: black" class="btn btn-sm add-in-cart-btn" th:id="${item.getId()}" th:attr="data-item-id=${item.getId()}">Переместить в In Progress</button>
                 <button style="background-color: grey; border-color: black" class="btn btn-sm delete-btn" th:id="${item.getId()}" th:attr="data-item-id=${item.getId()}" > Удалить задачу из списка </button>
+                <a th:href="'/main/edit/'+${item.getId()}" target="_self" style="float: left; margin: 10px"> <button>Edit task</button></a>
             </div>
         </div>
     </div>

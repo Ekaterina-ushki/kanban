@@ -17,12 +17,12 @@
 </style>
 
 <body>
-    <div class= itemAdd id="prodAdd" style="padding-left: 30px; padding-top: 10px">
+    <div class= "itemAdd" id="prodAdd" style="padding-left: 30px; padding-top: 10px">
         <a href="/board"><button>Вернуться к выбору доски</button></a>
         <div class="new_element">
-            <span>Добавить новую доску</span>
+            <p id="add-board" style="margin-top: 5px">Добавить новую доску</p>
             <form action="/add/confirm" method="post" enctype="multipart/form-data">
-                <p><input type="text" placeholder="Наизвание " name="name" id="name" required/>
+                <p><input type="text" placeholder="Название " name="name" id="name" th:required="required"/></p>
 
                 <p><button type="submit" id="submit">Добавить</button></p>
             </form>

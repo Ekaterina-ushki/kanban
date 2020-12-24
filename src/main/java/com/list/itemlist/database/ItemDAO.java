@@ -15,4 +15,5 @@ public interface ItemDAO {
     void addItemToInProgress(int id);
     List<Item> findAllInDone(int id);
     void addItemToDone(int id);
+    void editTask(int id, String description);
 }

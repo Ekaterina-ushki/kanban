@@ -16,4 +16,5 @@ public class UserService {
     public void insertUser(MyUser myUser) {
         dataBase.insertUser(myUser);
     }
+
 }

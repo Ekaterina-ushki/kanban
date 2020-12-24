@@ -146,6 +146,23 @@ public class DBService implements ItemDAO, BoardDAO, UserDao {
     }
 
     @Override
+    public void editTask(int id, String description) {
+        Session session = CreatingSessionFactory.getSessionFactory().openSession();
+        try{
+            Transaction transaction = session.beginTransaction();
+            Item item = findById(id);
+            item.setDescription(description);
+            session.update(item);
+            transaction.commit();
+        }catch (Exception e){
+            System.out.println("Exception: " + e);
+            e.printStackTrace();
+        }finally {
+            session.close();
+        }
+    }
+
+    @Override
     public List<Board> findAllBoard() {
         Session session = CreatingSessionFactory.getSessionFactory().openSession();
         try{

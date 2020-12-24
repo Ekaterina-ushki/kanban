@@ -50,5 +50,8 @@ public class ItemService {
         dataBase.addItemToDone(id);
     }
 
+    public void editTask(int id, String description){
+        dataBase.editTask(id, description);
+    }
 
 }
