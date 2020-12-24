@@ -34,7 +34,6 @@ public class RegistrationController {
                              @RequestParam("pass2") String pass2,
                              @RequestParam("email") String email) {
 
-        //clearErrors();
         userService.insertUser(new MyUser(1,login, pass1, email));
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("login");
